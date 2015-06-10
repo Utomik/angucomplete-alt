@@ -125,6 +125,7 @@ var app = angular.module('app', ["angucomplete-alt"]);
 | focus-out | A function or expression to be called when input field lose focus. [example](http://ghiden.github.io/angucomplete-alt/#example12) |  No | focusOut() |
 | disable-input | A model to control disable/enable of input field. [example page](http://ghiden.github.io/angucomplete-alt/#example13) |  No | disableInput |
 | template-url | Customize the markup of the autocomplete template. [example page](http://ghiden.github.io/angucomplete-alt/#example14) |  No | "/my-custom-template.html" |
+| post-search-filters | Array of filter functions which are called sequentially after search results have been computed. Allows you to perform custom sorting and filtering on your search results. Each filter function feeds the result of the previous filter function into the next one. Function signature: `function(results, searchInputValue, scope)` |  No | postSearchFiltersArray |
 
 ### Scrollbar
 

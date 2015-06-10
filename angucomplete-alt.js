@@ -101,6 +101,7 @@
         autoMatch: '@',
         focusOut: '&',
         focusIn: '&',
+        postSearchFilters: '=',
         inputName: '@'
       },
       templateUrl: function(element, attrs) {
@@ -531,7 +532,7 @@
         }
 
         function processResults(responseData, str) {
-          var i, description, image, text, formattedText, formattedDesc;
+          var i, description, image, text, formattedText, formattedDesc, tempResults;
 
           if (responseData && responseData.length > 0) {
             scope.results = [];
@@ -571,6 +572,14 @@
 
           } else {
             scope.results = [];
+          }
+
+          if (scope.postSearchFilters !== undefined) {
+            tempResults = scope.results;
+            for (i = 0; i < scope.postSearchFilters.length; i++) {
+              tempResults = scope.postSearchFilters[i](tempResults, scope.searchStr, scope);
+            }
+            scope.results = tempResults;
           }
         }
 
