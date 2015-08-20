@@ -10,10 +10,10 @@
 'use strict';
 
 (function (root, factory) {
-  if (typeof module !== 'undefined' && module.exports) {
+  if (typeof module !== 'undefined' && module.exports && (root === undefined || !root.angular)) {
     // CommonJS
     module.exports = factory(require('angular'));
-  } else if (typeof define === 'function' && define.amd) {
+  } else if (typeof define === 'function' && define.amd && (root === undefined || !root.angular)) {
     // AMD
     define(['angular'], factory);
   } else {
