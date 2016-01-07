@@ -333,7 +333,7 @@
           var row = null;
           var rowTop = null;
 
-          if (which === KEY_EN && scope.results) {
+          if (which === KEY_EN && scope.results && !scope.searching) {
             if (scope.currentIndex >= 0 && scope.currentIndex < scope.results.length) {
               event.preventDefault();
               scope.selectResult(scope.results[scope.currentIndex]);
@@ -401,6 +401,8 @@
                 handleOverrideSuggestions();
               }
             }
+          } else if (which === KEY_EN) {
+            event.preventDefault();
           }
         }
 
