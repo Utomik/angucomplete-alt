@@ -75,6 +75,7 @@
         disableInput: '=',
         initialValue: '@',
         localData: '=',
+        localSearch: '&',
         remoteUrlRequestFormatter: '=',
         remoteUrlRequestWithCredentials: '@',
         remoteUrlResponseFormatter: '=',
@@ -489,18 +490,22 @@
               searchFields = scope.searchFields.split(','),
               matches = [];
 
-          for (i = 0; i < scope.localData.length; i++) {
-            match = false;
+            if (typeof scope.localSearch() !== 'undefined') {
+              matches = scope.localSearch()(str, scope.localData);
+            } else {
+              for (i = 0; i < scope.localData.length; i++) {
+                match = false;
 
-            for (s = 0; s < searchFields.length; s++) {
-              value = extractValue(scope.localData[i], searchFields[s]) || '';
-              match = match || (value.toLowerCase().indexOf(str.toLowerCase()) >= 0);
-            }
+                for (s = 0; s < searchFields.length; s++) {
+                  value = extractValue(scope.localData[i], searchFields[s]) || '';
+                  match = match || (value.toLowerCase().indexOf(str.toLowerCase()) >= 0);
+                }
 
-            if (match) {
-              matches[matches.length] = scope.localData[i];
+                if (match) {
+                  matches[matches.length] = scope.localData[i];
+                }
+              }
             }
-          }
 
           scope.searching = false;
           processResults(matches, str);
